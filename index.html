@@ -72,12 +72,35 @@
       justify-content:space-between;
       align-items:center;
       mix-blend-mode:difference;
+      transition: background 0.3s ease;
     }
 
     .brand{font-family:'Berghan', serif; font-size: 24px; color:#fff;text-decoration:none}
+    .navlinks{display:flex; align-items:center;}
     .navlinks a{color:#fff;text-decoration:none;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;margin-left:36px;transition:color 0.3s; font-family:'Berghan', serif; cursor:pointer;}
     .navlinks a:hover{color:var(--accent-soft)}
     
+    /* HAMBURGER TOGGLE UNTUK MOBILE */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 28px;
+      height: 20px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      z-index: 101;
+    }
+
+    .menu-toggle span {
+      width: 100%;
+      height: 2px;
+      background-color: var(--accent-soft);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
     /* HERO LANDING SECTION */
     .hero-landing{
       position:relative;
@@ -110,12 +133,13 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      padding: 0 20px;
     }
 
     /* EFEK NAMA NYALA HOVER BIRU SOFT */
     .hero-name {
       font-family: "Berghan", serif;
-      font-size: clamp(55px, 10vw, 140px);
+      font-size: clamp(45px, 10vw, 140px);
       line-height: 0.88;
       color: rgba(255, 255, 255, 0.85);
       text-transform: uppercase;
@@ -137,15 +161,17 @@
     }
 
     .hero-title-overlay p{
-      font-size:12px;
-      letter-spacing:0.45em;
+      font-size: clamp(10px, 2.5vw, 12px);
+      letter-spacing:0.35em;
       text-transform:uppercase;
       margin-top:28px;
       color:var(--accent-soft);
       font-weight:600;
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 12px;
+      text-align: center;
     }
 
     .hero-title-overlay p::before, .hero-title-overlay p::after {
@@ -269,21 +295,40 @@
     .timeline time{font-family:"Berghan",serif;font-size:16px;color:var(--accent-soft)}
     .timeline h4{font-family:"Berghan",serif; font-size: 18px; margin-top: 4px;}
 
-    .contact-section{text-align:center;padding:160px 10vw 100px;background: transparent;position:relative;z-index:2;border-top:1px solid var(--line)}
-    .contact-btn{
-      display:inline-block;
-      margin-top:40px;
-      padding:18px 42px;
-      border:1px solid var(--accent-soft);
-      color:var(--accent-soft);
-      border-radius:50px;
-      text-decoration:none;
-      font-size:12px;
-      letter-spacing:0.2em;
-      text-transform:uppercase;
-      font-weight:700;
-      transition:0.4s;
+    /* KONTAK SECTION (DENGAN PERBAIKAN EMAIL PRESISI DI TENGAH) */
+    .contact-section{
+      text-align:center;
+      padding:160px 10vw 100px;
+      background: transparent;
+      position:relative;
+      z-index:2;
+      border-top:1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
+
+    .contact-btn{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 40px auto 0;
+      padding: 18px 42px;
+      border: 1px solid var(--accent-soft);
+      color: var(--accent-soft);
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 700;
+      transition: 0.4s;
+      text-align: center;
+      max-width: 90vw;
+      word-break: break-all;
+    }
+
     .contact-btn:hover{
       background:var(--accent-soft);
       color:#0B0D12;
@@ -292,13 +337,60 @@
     
     footer{padding:40px 10vw;background:rgba(0,0,0,0.4);border-top:1px solid var(--line);display:flex;justify-content:space-between;font-size:12px;color:var(--muted);position:relative;z-index:2;backdrop-filter:blur(10px)}
     
+    /* ADAPTASI DAN RESPONSIVITAS MOBILE (HP) */
     @media (max-width:768px){
+      header {
+        padding: 0 24px;
+        height: 70px;
+        mix-blend-mode: normal;
+        background: rgba(11, 13, 18, 0.85);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      .navlinks {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: rgba(11, 13, 18, 0.95);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 30px 0;
+        gap: 24px;
+        border-bottom: 1px solid var(--line);
+        transform: translateY(-150%);
+        transition: transform 0.4s ease;
+        z-index: 99;
+      }
+
+      .navlinks.active {
+        transform: translateY(0);
+      }
+
+      .navlinks a {
+        margin-left: 0;
+        font-size: 14px;
+      }
+
       .horizontal-scroll-container{height:auto}
       .sticky-wrapper{position:relative;height:auto}
       .horizontal-track{flex-direction:column;width:100%;transform:none!important}
       .panel{width:100%;height:auto;padding:80px 24px}
       .projects-horizontal,.about-content,.skills-grid{grid-template-columns:1fr;flex-direction:column}
       .project-card{width:100%}
+
+      .contact-section {
+        padding: 100px 24px 80px;
+      }
+      .contact-btn {
+        padding: 16px 28px;
+        font-size: 11px;
+      }
     }
   </style>
 </head>
@@ -309,7 +401,14 @@
 
   <header>
     <a href="#hero" class="brand">Irgi Kurniawan</a>
-    <nav class="navlinks">
+    
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="navlinks" id="navLinks">
       <a href="#projects">Proyek</a>
       <a href="#skills">Skills</a>
       <a href="#about">Tentang</a>
@@ -405,7 +504,7 @@
         <p>Terbiasa merancang arsitektur sistem dari awal, mengelola basis data relasional, hingga mengimplementasikan validasi bisnis yang kompleks. Memiliki kemampuan analisis logis yang kuat, komunikatif, serta berdedikasi tinggi untuk terus berkembang di lingkup profesional pengembangan perangkat lunak.</p>
       </div>
       <div class="timeline">
-        <article><time>2023 - Sekarang (Perkiraan Lulus 2027)</time><h4>S1 Teknologi Informasi - UBSI</h4><p>IPK 3.87</p></article>
+        <article><time>2023 - Sekarang</time><h4>S1 TI — UBSI</h4><p>IPK 3.87</p></article>
         <article><time>2025</time><h4>Hybrid Cryptography Web App</h4><p>AES-GCM + RSA Python</p></article>
         <article><time>2026</time><h4>URL Shortener</h4><p>Next.js & PostgreSQL</p></article>
       </div>
@@ -414,11 +513,11 @@
   
   <section class="contact-section" id="contact">
     <div class="eyebrow" style="justify-content:center">Mari Berkolaborasi</div>
-    <h2 style="font-family:'Berghan',serif;font-size:clamp(40px,5vw,72px);margin-top:15px">Tertarik Membangun Proyek Bersama?</h2>
+    <h2 style="font-family:'Berghan',serif;font-size:clamp(36px,5vw,72px);margin-top:15px">Tertarik Membangun Proyek Bersama?</h2>
     <a href="mailto:irgikurniawann@gmail.com" class="contact-btn">irgikurniawann@gmail.com</a>
   </section>
 
-  <footer><p>© Created By Irgi Kurniawan</p><p>Full-Stack Web Developer · Indonesia</p></footer>
+  <footer><p>© 2026 Irgi Kurniawan</p><p>Full-Stack Web Developer · Indonesia</p></footer>
 
   <script>
     /* --- PARTICLE CANVAS ENGINE --- */
@@ -520,10 +619,22 @@
     }
     requestAnimationFrame(updateScroll);
 
+    /* --- HAMBURGER MENU MOBILE HANDLER --- */
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
     /* --- NAVIGASI KLIK HANDLER --- */
     document.querySelectorAll('header a').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         e.preventDefault();
+        
+        // Tutup menu mobile jika sedang terbuka
+        navLinks.classList.remove('active');
+
         const targetId = this.getAttribute('href').substring(1);
         
         if (targetId === 'hero') {
