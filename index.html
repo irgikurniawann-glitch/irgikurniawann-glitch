@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Irgi Kurniawan — Full-Stack Web Developer</title>
+  <!-- Import Font Berghan -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Berghan&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #0B0D12;
+      --card-bg: rgba(15, 23, 42, 0.65);
+      --card-border: rgba(125, 211, 252, 0.15);
+      --card-hover-border: rgba(125, 211, 252, 0.5);
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-soft: #7dd3fc;
+      --accent-glow: rgba(125, 211, 252, 0.25);
+      --lime: #d2ff00;
+      --line: rgba(125, 211, 252, 0.12);
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+
+    body{
+      background-color: var(--bg-dark);
+      color: var(--text);
+      font-family: 'Berghan', serif, sans-serif;
+      overflow-x:hidden;
+      position:relative;
+    }
+
+    #particleCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -10;
+      background: #0B0D12;
+      pointer-events: none;
+    }
+
+    .grain{
+      position:fixed;
+      inset:0;
+      opacity:0.05;
+      background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+      mix-blend-mode: overlay;
+      pointer-events:none;
+      z-index:-9;
+    }
+
+    .vignette{
+      position:fixed;
+      inset:0;
+      background: radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.85) 100%);
+      pointer-events:none;
+      z-index:-8;
+    }
+
+    header{
+      height:90px;
+      position:fixed;
+      inset:0 0 auto;
+      z-index:100;
+      padding:0 50px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      mix-blend-mode:difference;
+    }
+
+    .brand{font-family:'Berghan', serif; font-size: 24px; color:#fff;text-decoration:none}
+    .navlinks a{color:#fff;text-decoration:none;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;margin-left:36px;transition:color 0.3s; font-family:'Berghan', serif; cursor:pointer;}
+    .navlinks a:hover{color:var(--accent-soft)}
+    
+    /* HERO LANDING SECTION */
+    .hero-landing{
+      position:relative;
+      width:100vw;
+      height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+    }
+
+    .hero-bg-wrapper{
+      position:absolute;
+      inset:0;
+      z-index:1;
+    }
+
+    .hero-img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center 33%;
+      filter: grayscale(100%) brightness(0.4) contrast(1.1);
+    }
+
+    .hero-title-overlay{
+      position:relative;
+      z-index:3;
+      text-align:center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* EFEK NAMA NYALA HOVER BIRU SOFT */
+    .hero-name {
+      font-family: "Berghan", serif;
+      font-size: clamp(55px, 10vw, 140px);
+      line-height: 0.88;
+      color: rgba(255, 255, 255, 0.85);
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      user-select: none;
+    }
+
+    .hero-name:hover {
+      color: #ffffff;
+      text-shadow: 
+        0 0 15px rgba(125, 211, 252, 0.8),
+        0 0 30px rgba(56, 189, 248, 0.6),
+        0 0 60px rgba(56, 189, 248, 0.4),
+        0 0 90px rgba(125, 211, 252, 0.2);
+      transform: scale(1.02);
+    }
+
+    .hero-title-overlay p{
+      font-size:12px;
+      letter-spacing:0.45em;
+      text-transform:uppercase;
+      margin-top:28px;
+      color:var(--accent-soft);
+      font-weight:600;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hero-title-overlay p::before, .hero-title-overlay p::after {
+      content: "";
+      width: 20px;
+      height: 1px;
+      background: var(--accent-soft);
+      opacity: 0.6;
+    }
+
+    .horizontal-scroll-container{position:relative;height:220vh}
+    .sticky-wrapper{position:sticky;top:0;height:100vh;overflow:hidden}
+    .horizontal-track{display:flex;height:100%;width:max-content;will-change:transform}
+    .panel{width:100vw;height:100vh;padding:0 10vw;display:flex;flex-direction:column;justify-content:center;flex-shrink:0}
+    .eyebrow{font-size:12px;letter-spacing:0.25em;text-transform:uppercase;color:var(--accent-soft);margin-bottom:20px;display:flex;align-items:center;gap:12px;font-weight:700}
+    .eyebrow::before{content:"";width:24px;height:1px;background:var(--accent-soft)}
+    .panel h2{font-family:"Berghan",serif;font-size:clamp(36px,4.5vw,64px);line-height:1.1;margin-bottom:35px}
+    
+    /* CARD BOX ESTETIK BIRU SOFT */
+    .projects-horizontal{display:flex;gap:32px;align-items:center}
+    .project-card{
+      width:400px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      padding: 24px;
+      border-radius: 16px;
+      backdrop-filter: blur(16px);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent-soft), transparent);
+      opacity: 0.3;
+    }
+
+    .project-card:hover{
+      border-color: var(--card-hover-border);
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(56, 189, 248, 0.15);
+    }
+
+    /* WADAH GAMBAR PROYEK */
+    .card-image-wrapper {
+      width: 100%;
+      height: 180px;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 18px;
+      border: 1px solid var(--line);
+      background-color: #070a12;
+    }
+
+    .card-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .project-card:hover .card-image {
+      transform: scale(1.05);
+    }
+
+    .card-info h3{font-size:22px;margin-bottom:8px;font-family:"Berghan",serif; color: #f8fafc;}
+    .card-info p{font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:18px}
+    
+    /* WADAH LINK GITHUB & DEMO */
+    .card-links {
+      display: flex;
+      gap: 16px;
+      margin-top: 10px;
+    }
+
+    .card-links a{
+      color:var(--accent-soft);
+      font-size:12px;
+      text-transform:uppercase;
+      text-decoration:none;
+      font-weight:700;
+      transition: all 0.3s ease;
+    }
+
+    .card-links a:hover{
+      color: #ffffff;
+      text-shadow: 0 0 8px var(--accent-soft);
+    }
+
+    .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:25px;max-width:1000px}
+    .skill-box{
+      background:var(--card-bg);
+      border:1px solid var(--card-border);
+      padding:32px;
+      border-radius:16px;
+      backdrop-filter:blur(16px);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      position: relative;
+    }
+    .skill-box:hover{
+      border-color: var(--card-hover-border);
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(56, 189, 248, 0.15);
+    }
+    .skill-box b{font-family:"Berghan",serif;font-size:28px;color:var(--accent-soft)}
+    .skill-box h3{margin:12px 0 8px;font-size:20px; font-family:"Berghan",serif;}
+    .skill-box p{font-size:14px;color:var(--muted);line-height:1.6}
+
+    .vertical-section{padding:140px 10vw;background: transparent; border-top:1px solid var(--line);position:relative;z-index:2}
+    .about-content{display:grid;grid-template-columns:1fr 1fr;gap:60px}
+    .about-bio p{font-size:16px;line-height:1.8;color:var(--muted);margin-bottom:20px}
+    .timeline article{padding:24px 0;border-bottom:1px dashed var(--line)}
+    .timeline time{font-family:"Berghan",serif;font-size:16px;color:var(--accent-soft)}
+    .timeline h4{font-family:"Berghan",serif; font-size: 18px; margin-top: 4px;}
+
+    .contact-section{text-align:center;padding:160px 10vw 100px;background: transparent;position:relative;z-index:2;border-top:1px solid var(--line)}
+    .contact-btn{
+      display:inline-block;
+      margin-top:40px;
+      padding:18px 42px;
+      border:1px solid var(--accent-soft);
+      color:var(--accent-soft);
+      border-radius:50px;
+      text-decoration:none;
+      font-size:12px;
+      letter-spacing:0.2em;
+      text-transform:uppercase;
+      font-weight:700;
+      transition:0.4s;
+    }
+    .contact-btn:hover{
+      background:var(--accent-soft);
+      color:#0B0D12;
+      box-shadow:0 0 30px rgba(125,211,252,0.5);
+    }
+    
+    footer{padding:40px 10vw;background:rgba(0,0,0,0.4);border-top:1px solid var(--line);display:flex;justify-content:space-between;font-size:12px;color:var(--muted);position:relative;z-index:2;backdrop-filter:blur(10px)}
+    
+    @media (max-width:768px){
+      .horizontal-scroll-container{height:auto}
+      .sticky-wrapper{position:relative;height:auto}
+      .horizontal-track{flex-direction:column;width:100%;transform:none!important}
+      .panel{width:100%;height:auto;padding:80px 24px}
+      .projects-horizontal,.about-content,.skills-grid{grid-template-columns:1fr;flex-direction:column}
+      .project-card{width:100%}
+    }
+  </style>
+</head>
+<body>
+  <canvas id="particleCanvas"></canvas>
+  <div class="grain"></div>
+  <div class="vignette"></div>
+
+  <header>
+    <a href="#hero" class="brand">Irgi Kurniawan</a>
+    <nav class="navlinks">
+      <a href="#projects">Proyek</a>
+      <a href="#skills">Skills</a>
+      <a href="#about">Tentang</a>
+      <a href="#contact">Kontak</a>
+    </nav>
+  </header>
+  
+  <!-- HERO LANDING SECTION -->
+  <section class="hero-landing" id="hero">
+    <div class="hero-bg-wrapper">
+      <img src="assets/irgiprofil.jpeg" alt="Irgi Kurniawan" class="hero-img">
+    </div>
+    <div class="hero-title-overlay">
+      <h1 class="hero-name">IRGI KURNIAWAN</h1>
+      <p>Full-Stack Web Developer & Cryptography Enthusiast</p>
+    </div>
+  </section>
+  
+  <div class="horizontal-scroll-container" id="horizontal-wrapper">
+    <div class="sticky-wrapper">
+      <div class="horizontal-track" id="track">
+        <section class="panel" id="projects">
+          <div class="eyebrow">Proyek Unggulan</div>
+          <h2>Solusi Rekayasa Web & Kriptografi.</h2>
+          <div class="projects-horizontal">
+            
+            <!-- PROYEK 1 -->
+            <article class="project-card">
+              <div class="card-image-wrapper">
+                <img src="assets/shortlink.png" alt="URL Shortener" class="card-image">
+              </div>
+              <div class="card-info">
+                <h3>URL Shortener Full-Stack</h3>
+                <p>Platform pemendek URL lengkap dengan analisis data klik.</p>
+                <div class="card-links">
+                  <a href="https://shortlink-app-green.vercel.app/" target="_blank">Kunjungi Web ↗</a>
+                  <a href="https://github.com/irgikurniawann-glitch" target="_blank">GitHub ↗</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- PROYEK 2 -->
+            <article class="project-card">
+              <div class="card-image-wrapper">
+                <img src="assets/kriptografi.png" alt="Hybrid Cryptography App" class="card-image">
+              </div>
+              <div class="card-info">
+                <h3>Hybrid Cryptography App</h3>
+                <p>Sistem pengamanan dokumen AES-GCM + RSA.</p>
+                <div class="card-links">
+                  <a href="https://huggingface.co/spaces/irgikann09-co/pandai-encrypt-system" target="_blank">Kunjungi Web ↗</a>
+                  <a href="https://github.com/irgikurniawann-glitch" target="_blank">GitHub ↗</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- PROYEK 3 -->
+            <article class="project-card">
+              <div class="card-image-wrapper">
+                <img src="assets/github.png" alt="GitHub Repositories" class="card-image">
+              </div>
+              <div class="card-info">
+                <h3>GitHub Repositories</h3>
+                <p>Source code & eksperimen open-source.</p>
+                <div class="card-links">
+                  <a href="https://github.com/irgikurniawann-glitch" target="_blank">Buka GitHub ↗</a>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </section>
+        
+        <section class="panel" id="skills">
+          <div class="eyebrow">Keahlian Utama</div>
+          <h2>Spesialisasi & Ekosistem Teknologi.</h2>
+          <div class="skills-grid">
+            <div class="skill-box"><b>01</b><h3>Full-Stack Web</h3><p>Next.js, React, Node.js, Express, PHP, Python, Tailwind.</p></div>
+            <div class="skill-box"><b>02</b><h3>Database & Backend</h3><p>PostgreSQL, MySQL, Prisma ORM, RESTful API.</p></div>
+            <div class="skill-box"><b>03</b><h3>Keamanan Data</h3><p>AES, RSA, JWT, Bcrypt.</p></div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+  
+  <section class="vertical-section" id="about">
+    <div class="eyebrow">Tentang Saya</div>
+    <h2 style="font-family:'Berghan',serif;font-size:clamp(36px,4vw,56px);margin-bottom:40px">Latar Belakang & Rekam Jejak.</h2>
+    <div class="about-content">
+      <div class="about-bio">
+        <p>Mahasiswa Teknologi Informasi di Universitas Bina Sarana Informatika dengan IPK 3.87. Memiliki ketertarikan mendalam dan pengalaman praktis dalam rekayasa perangkat lunak, pengembangan aplikasi <em>Full-Stack Web</em>, serta sistem keamanan informasi dan kriptografi.</p>
+        <p>Terbiasa merancang arsitektur sistem dari awal, mengelola basis data relasional, hingga mengimplementasikan validasi bisnis yang kompleks. Memiliki kemampuan analisis logis yang kuat, komunikatif, serta berdedikasi tinggi untuk terus berkembang di lingkup profesional pengembangan perangkat lunak.</p>
+      </div>
+      <div class="timeline">
+        <article><time>2023 - Sekarang (Perkiraan Lulus 2027)</time><h4>S1 Teknologi Informasi - UBSI</h4><p>IPK 3.87</p></article>
+        <article><time>2025</time><h4>Hybrid Cryptography Web App</h4><p>AES-GCM + RSA Python</p></article>
+        <article><time>2026</time><h4>URL Shortener</h4><p>Next.js & PostgreSQL</p></article>
+      </div>
+    </div>
+  </section>
+  
+  <section class="contact-section" id="contact">
+    <div class="eyebrow" style="justify-content:center">Mari Berkolaborasi</div>
+    <h2 style="font-family:'Berghan',serif;font-size:clamp(40px,5vw,72px);margin-top:15px">Tertarik Membangun Proyek Bersama?</h2>
+    <a href="mailto:irgikurniawann@gmail.com" class="contact-btn">irgikurniawann@gmail.com</a>
+  </section>
+
+  <footer><p>© Created By Irgi Kurniawan</p><p>Full-Stack Web Developer · Indonesia</p></footer>
+
+  <script>
+    /* --- PARTICLE CANVAS ENGINE --- */
+    const canvas = document.getElementById('particleCanvas');
+    const ctx = canvas.getContext('2d');
+
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 1.0;
+        this.vy = (Math.random() - 0.5) * 1.0;
+        this.size = Math.random() * 2 + 1;
+      }
+
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if (this.x < 0 || this.x > width) this.vx *= -1;
+        if (this.y < 0 || this.y > height) this.vy *= -1;
+      }
+
+      draw() {
+        ctx.fillStyle = '#7dd3fc';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    const particles = Array.from({ length: 60 }, () => new Particle());
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, width, height);
+
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 120) {
+            ctx.strokeStyle = `rgba(125, 211, 252, ${0.25 * (1 - dist / 120)})`;
+            ctx.lineWidth = 0.7;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    /* --- SMOOTH HORIZONTAL SCROLL ENGINE --- */
+    let currentScroll = window.scrollY;
+    let targetScroll = window.scrollY;
+    let ease = 0.075;
+
+    window.addEventListener('wheel', (e) => {
+      if (window.innerWidth > 768) {
+        e.preventDefault();
+        targetScroll += e.deltaY * 0.35;
+        targetScroll = Math.max(0, Math.min(targetScroll, document.body.scrollHeight - window.innerHeight));
+      }
+    }, { passive: false });
+
+    const container = document.getElementById('horizontal-wrapper');
+    const track = document.getElementById('track');
+
+    function updateScroll() {
+      if (window.innerWidth > 768) {
+        currentScroll += (targetScroll - currentScroll) * ease;
+        window.scrollTo(0, currentScroll);
+      } else { currentScroll = window.scrollY; }
+      
+      const containerTop = container.offsetTop;
+      const containerHeight = container.offsetHeight - window.innerHeight;
+      if (currentScroll >= containerTop && currentScroll <= containerTop + containerHeight) {
+        const progress = (currentScroll - containerTop) / containerHeight;
+        const maxScroll = track.scrollWidth - window.innerWidth;
+        track.style.transform = `translateX(-${progress * maxScroll}px)`;
+      }
+      requestAnimationFrame(updateScroll);
+    }
+    requestAnimationFrame(updateScroll);
+
+    /* --- NAVIGASI KLIK HANDLER --- */
+    document.querySelectorAll('header a').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        
+        if (targetId === 'hero') {
+          targetScroll = 0;
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          return;
+        }
+
+        const containerTop = container.offsetTop;
+        const containerHeight = container.offsetHeight - window.innerHeight;
+
+        if (targetId === 'projects') {
+          targetScroll = containerTop;
+        } else if (targetId === 'skills') {
+          targetScroll = containerTop + containerHeight;
+        } else {
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+            targetScroll = targetElement.offsetTop;
+          }
+        }
+
+        if (window.innerWidth <= 768) {
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+          }
+        } else {
+          window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
