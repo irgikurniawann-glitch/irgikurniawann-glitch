@@ -1,7 +1,7 @@
-## Hi there 👋
+## Hi there!
 
 <!--
-**irgikurniawann-glitch/irgikurniawann-glitch** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+**irgikurniawann-glitch/irgikurniawann-glitch** is a  _special_ pository because its `README.md` (this file) appears on your GitHub profile.
 
 Here are some ideas to get you started:
 
