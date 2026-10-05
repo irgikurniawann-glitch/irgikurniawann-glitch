@@ -1,5 +1,4 @@
-# Personal Portfolio Website — Irgi Kurniawan
-
+# Personal Portfolio Website 
 Selamat datang di repository portofolio saya!
 
  **Live Demo / Kunjungi Website:**  
