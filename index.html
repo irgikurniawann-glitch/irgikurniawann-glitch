@@ -7,21 +7,21 @@
   <!-- Import Font Berghan -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Berghan&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   
   <style>
     :root {
-      --bg-dark: #0B0D12;
-      --card-bg: rgba(15, 23, 42, 0.65);
-      --card-border: rgba(125, 211, 252, 0.15);
+      --bg-dark: #537fac;
+      --card-bg: #FFFFFF;
+      --card-border:#708090;
       --card-hover-border: rgba(125, 211, 252, 0.5);
-      --text: #f8fafc;
-      --muted: #94a3b8;
-      --accent: #38bdf8;
-      --accent-soft: #7dd3fc;
-      --accent-glow: rgba(125, 211, 252, 0.25);
+      --text: #fcfcfc;
+      --muted: #000000;
+      --accent: #fcfcfc;
+      --accent-soft: #f7f9fa;
+      --accent-glow: rgba(19, 20, 20, 0.25);
       --lime: #d2ff00;
-      --line: rgba(125, 211, 252, 0.12);
+      --line: rgba(38, 157, 212, 0.12);
     }
 
     *{box-sizing:border-box;margin:0;padding:0}
@@ -29,7 +29,7 @@
     body{
       background-color: var(--bg-dark);
       color: var(--text);
-      font-family: 'Berghan', serif, sans-serif;
+      font-family: poppins;
       overflow-x:hidden;
       position:relative;
     }
@@ -75,10 +75,10 @@
       transition: background 0.3s ease;
     }
 
-    .brand{font-family:'Berghan', serif; font-size: 24px; color:#fff;text-decoration:none}
+    .brand{font-family:Poppins; font-size: 24px; color:#fff;text-decoration:none}
     .navlinks{display:flex; align-items:center;}
-    .navlinks a{color:#fff;text-decoration:none;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;margin-left:36px;transition:color 0.3s; font-family:'Berghan', serif; cursor:pointer;}
-    .navlinks a:hover{color:var(--accent-soft)}
+    .navlinks a{color:#ffffff;text-decoration:none;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;margin-left:36px;transition:color 0.3s; font-family:Poppins; cursor:pointer;}
+    .navlinks a:hover{color:#000000}
     
     /* HAMBURGER TOGGLE UNTUK MOBILE */
     .menu-toggle {
@@ -138,7 +138,7 @@
 
     /* EFEK NAMA NYALA HOVER BIRU SOFT */
     .hero-name {
-      font-family: "Berghan", serif;
+      font-family: Poppins ;
       font-size: clamp(45px, 10vw, 140px);
       line-height: 0.88;
       color: rgba(255, 255, 255, 0.85);
@@ -162,12 +162,13 @@
 
     .hero-title-overlay p{
       font-size: clamp(10px, 2.5vw, 12px);
-      letter-spacing:0.35em;
+      font-family: Poppins;
+      letter-spacing:0.10em;
       text-transform:uppercase;
       margin-top:28px;
-      color:var(--accent-soft);
+      color:#ffffff;
       font-weight:600;
-      display: flex;
+      
       align-items: center;
       justify-content: center;
       gap: 12px;
@@ -178,7 +179,7 @@
       content: "";
       width: 20px;
       height: 1px;
-      background: var(--accent-soft);
+      background: #000000;
       opacity: 0.6;
     }
 
@@ -186,9 +187,9 @@
     .sticky-wrapper{position:sticky;top:0;height:100vh;overflow:hidden}
     .horizontal-track{display:flex;height:100%;width:max-content;will-change:transform}
     .panel{width:100vw;height:100vh;padding:0 10vw;display:flex;flex-direction:column;justify-content:center;flex-shrink:0}
-    .eyebrow{font-size:12px;letter-spacing:0.25em;text-transform:uppercase;color:var(--accent-soft);margin-bottom:20px;display:flex;align-items:center;gap:12px;font-weight:700}
+    .eyebrow{font-size:15px;letter-spacing:0.1em;text-transform:uppercase;color:#ffffff;margin-bottom:18px;display:-ms-grid  ;align-items:center;gap:12px;font-weight:700}
     .eyebrow::before{content:"";width:24px;height:1px;background:var(--accent-soft)}
-    .panel h2{font-family:"Berghan",serif;font-size:clamp(36px,4.5vw,64px);line-height:1.1;margin-bottom:35px}
+    .panel h2{font-family:'Poppins';font-size:clamp(35px,4.5vw,64px);line-height:1.1;margin-bottom:35px}
     
     /* CARD BOX ESTETIK BIRU SOFT */
     .projects-horizontal{display:flex;gap:32px;align-items:center}
@@ -198,9 +199,9 @@
       border: 1px solid var(--card-border);
       padding: 24px;
       border-radius: 16px;
-      backdrop-filter: blur(16px);
+      backdrop-filter: blur(28px);
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      box-shadow: 0 8px 32px 0 rgba(14, 160, 228, 0.37);
       position: relative;
       overflow: hidden;
     }
@@ -244,27 +245,28 @@
       transform: scale(1.05);
     }
 
-    .card-info h3{font-size:22px;margin-bottom:8px;font-family:"Berghan",serif; color: #f8fafc;}
-    .card-info p{font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:18px}
+    .card-info h3{font-size:22px;margin-bottom:8px;font-family:'Poppins'; color: #537fac;}
+    .card-info p{font-size:14px;color:#537fac;line-height:1.6;margin-bottom:18px}
     
     /* WADAH LINK GITHUB & DEMO */
     .card-links {
-      display: flex;
+      display:grid;
       gap: 16px;
       margin-top: 10px;
     }
 
     .card-links a{
-      color:var(--accent-soft);
+      color:#708090;
       font-size:12px;
       text-transform:uppercase;
       text-decoration:none;
       font-weight:700;
       transition: all 0.3s ease;
+      font-family: Poppins  ;
     }
 
     .card-links a:hover{
-      color: #ffffff;
+      color: rgba(14, 160, 228, 0.37);
       text-shadow: 0 0 8px var(--accent-soft);
     }
 
@@ -284,16 +286,16 @@
       transform: translateY(-6px);
       box-shadow: 0 12px 40px rgba(56, 189, 248, 0.15);
     }
-    .skill-box b{font-family:"Berghan",serif;font-size:28px;color:var(--accent-soft)}
-    .skill-box h3{margin:12px 0 8px;font-size:20px; font-family:"Berghan",serif;}
-    .skill-box p{font-size:14px;color:var(--muted);line-height:1.6}
+    .skill-box b{font-family:'Poppins';font-size:28px;color:#537fac}
+    .skill-box h3{margin:12px 0 8px;font-size:20px; font-family:Poppins;}
+    .skill-box p{font-family:'Poppins';font-size:16px;color:#537fac;line-height:1.6}
 
     .vertical-section{padding:140px 10vw;background: transparent; border-top:1px solid var(--line);position:relative;z-index:2}
     .about-content{display:grid;grid-template-columns:1fr 1fr;gap:60px}
-    .about-bio p{font-size:16px;line-height:1.8;color:var(--muted);margin-bottom:20px}
+    .about-bio p{font-size:16px;line-height:1.8;color:#ffffff;margin-bottom:20px}
     .timeline article{padding:24px 0;border-bottom:1px dashed var(--line)}
-    .timeline time{font-family:"Berghan",serif;font-size:16px;color:var(--accent-soft)}
-    .timeline h4{font-family:"Berghan",serif; font-size: 18px; margin-top: 4px;}
+    .timeline time{font-family:'Poppins';font-size:16px;color:#ffffff}
+    .timeline h4{font-family:Poppins; font-size: 18px; margin-top: 4px;}
 
     /* KONTAK SECTION (DENGAN PERBAIKAN EMAIL PRESISI DI TENGAH) */
     .contact-section{
@@ -335,7 +337,7 @@
       box-shadow:0 0 30px rgba(125,211,252,0.5);
     }
     
-    footer{padding:40px 10vw;background:rgba(0,0,0,0.4);border-top:1px solid var(--line);display:flex;justify-content:space-between;font-size:12px;color:var(--muted);position:relative;z-index:2;backdrop-filter:blur(10px)}
+    footer{padding:40px 10vw;background:rgba(25,211,252,0.5);border-top:1px solid var(--line);display:flex;justify-content:space-between;font-size:12px;color:#000000;position:relative;z-index:2;backdrop-filter:blur(10px)}
     
     /* ADAPTASI DAN RESPONSIVITAS MOBILE (HP) */
     @media (max-width:768px){
@@ -395,9 +397,8 @@
   </style>
 </head>
 <body>
-  <canvas id="particleCanvas"></canvas>
-  <div class="grain"></div>
-  <div class="vignette"></div>
+ 
+
 
   <header>
     <a href="#hero" class="brand">Irgi Kurniawan</a>
@@ -432,7 +433,7 @@
       <div class="horizontal-track" id="track">
         <section class="panel" id="projects">
           <div class="eyebrow">Proyek Unggulan</div>
-          <h2>Solusi Rekayasa Web & Kriptografi.</h2>
+          <h2>Aplikasi Web Shortlink & Kriptografi.</h2>
           <div class="projects-horizontal">
             
             <!-- PROYEK 1 -->
@@ -442,7 +443,7 @@
               </div>
               <div class="card-info">
                 <h3>URL Shortener Full-Stack</h3>
-                <p>Platform pemendek URL lengkap dengan analisis data klik.</p>
+                <p>Platform pemendek URL lengkap dengan analisis data klik dan Qr code.</p>
                 <div class="card-links">
                   <a href="https://shortlink-app-green.vercel.app/" target="_blank">Kunjungi Web ↗</a>
                   <a href="https://github.com/irgikurniawann-glitch" target="_blank">GitHub ↗</a>
@@ -484,7 +485,7 @@
         
         <section class="panel" id="skills">
           <div class="eyebrow">Keahlian Utama</div>
-          <h2>Spesialisasi & Ekosistem Teknologi.</h2>
+          <h2>Teknologi yang digunakan.</h2>
           <div class="skills-grid">
             <div class="skill-box"><b>01</b><h3>Full-Stack Web</h3><p>Next.js, React, Node.js, Express, PHP, Python, Tailwind.</p></div>
             <div class="skill-box"><b>02</b><h3>Database & Backend</h3><p>PostgreSQL, MySQL, Prisma ORM, RESTful API.</p></div>
@@ -497,14 +498,14 @@
   
   <section class="vertical-section" id="about">
     <div class="eyebrow">Tentang Saya</div>
-    <h2 style="font-family:'Berghan',serif;font-size:clamp(36px,4vw,56px);margin-bottom:40px">Latar Belakang & Rekam Jejak.</h2>
+    <h2 style="font-family:Poppins;font-size:clamp(36px,4vw,56px);margin-bottom:40px">Latar Belakang & Rekam Jejak.</h2>
     <div class="about-content">
       <div class="about-bio">
         <p>Mahasiswa Teknologi Informasi di Universitas Bina Sarana Informatika dengan IPK 3.87. Memiliki ketertarikan mendalam dan pengalaman praktis dalam rekayasa perangkat lunak, pengembangan aplikasi <em>Full-Stack Web</em>, serta sistem keamanan informasi dan kriptografi.</p>
         <p>Terbiasa merancang arsitektur sistem dari awal, mengelola basis data relasional, hingga mengimplementasikan validasi bisnis yang kompleks. Memiliki kemampuan analisis logis yang kuat, komunikatif, serta berdedikasi tinggi untuk terus berkembang di lingkup profesional pengembangan perangkat lunak.</p>
       </div>
       <div class="timeline">
-        <article><time>2023 - Sekarang</time><h4>S1 TI — UBSI</h4><p>IPK 3.87</p></article>
+        <article><time>2023 - Sekarang</time><h4>S1 Teknologi Informasi - UBSI</h4><p>IPK 3.87</p></article>
         <article><time>2025</time><h4>Hybrid Cryptography Web App</h4><p>AES-GCM + RSA Python</p></article>
         <article><time>2026</time><h4>URL Shortener</h4><p>Next.js & PostgreSQL</p></article>
       </div>
@@ -513,78 +514,14 @@
   
   <section class="contact-section" id="contact">
     <div class="eyebrow" style="justify-content:center">Mari Berkolaborasi</div>
-    <h2 style="font-family:'Berghan',serif;font-size:clamp(36px,5vw,72px);margin-top:15px">Tertarik Membangun Proyek Bersama?</h2>
+    <h2 style="font-family:Poppins;font-size:clamp(36px,5vw,72px);margin-top:15px">Tertarik Membangun Proyek Bersama?</h2>
     <a href="mailto:irgikurniawann@gmail.com" class="contact-btn">irgikurniawann@gmail.com</a>
   </section>
 
-  <footer><p>© 2026 Irgi Kurniawan</p><p>Full-Stack Web Developer · Indonesia</p></footer>
+  <footer><p>© 2026 Irgi Kurniawan</p><p>Full Stack Web Developer · Indonesia</p></footer>
 
   <script>
-    /* --- PARTICLE CANVAS ENGINE --- */
-    const canvas = document.getElementById('particleCanvas');
-    const ctx = canvas.getContext('2d');
-
-    let width = canvas.width = window.innerWidth;
-    let height = canvas.height = window.innerHeight;
-
-    window.addEventListener('resize', () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-    });
-
-    class Particle {
-      constructor() {
-        this.x = Math.random() * width;
-        this.y = Math.random() * height;
-        this.vx = (Math.random() - 0.5) * 1.0;
-        this.vy = (Math.random() - 0.5) * 1.0;
-        this.size = Math.random() * 2 + 1;
-      }
-
-      update() {
-        this.x += this.vx;
-        this.y += this.vy;
-
-        if (this.x < 0 || this.x > width) this.vx *= -1;
-        if (this.y < 0 || this.y > height) this.vy *= -1;
-      }
-
-      draw() {
-        ctx.fillStyle = '#7dd3fc';
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
-
-    const particles = Array.from({ length: 60 }, () => new Particle());
-
-    function animateParticles() {
-      ctx.clearRect(0, 0, width, height);
-
-      for (let i = 0; i < particles.length; i++) {
-        particles[i].update();
-        particles[i].draw();
-
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-
-          if (dist < 120) {
-            ctx.strokeStyle = `rgba(125, 211, 252, ${0.25 * (1 - dist / 120)})`;
-            ctx.lineWidth = 0.7;
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.stroke();
-          }
-        }
-      }
-
-      requestAnimationFrame(animateParticles);
-    }
-    animateParticles();
+    
 
     /* --- SMOOTH HORIZONTAL SCROLL ENGINE --- */
     let currentScroll = window.scrollY;
